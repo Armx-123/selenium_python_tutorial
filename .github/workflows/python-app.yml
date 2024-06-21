@@ -29,7 +29,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
-        python get_title.py
+        python test_login.py
       
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
@@ -42,14 +42,3 @@ jobs:
             mkdir -p reports
             pytest  --html=reports/reports.html
             chmod 777  /home/runner/work/selenium_python_tutorial/selenium_python_tutorial/reports/reports.html
-
-    - uses: actions/upload-artifact@v3
-      if: success() || failure()
-      with:
-        name: test-report
-        path: ${{ steps.results.outputs.artifactPath }}
-
-
-
-
-
